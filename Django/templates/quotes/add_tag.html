@@ -1,0 +1,37 @@
+{% extends 'quotes/base_add_data.html' %}
+{% load static %}
+{% block content %}
+
+<body class="popup  app-quotes model-tag change-form" data-admin-utc-offset="0">
+  <a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+  <!-- Container -->
+  <div id="container">
+    <div class="main" id="main">
+      <main id="content-start" class="content" tabindex="-1">
+        <!-- Content -->
+        <div id="content" class="colM">
+          <h1>Add tag</h1>
+          <div id="content-main">
+            <form method="post" id="tag_form" novalidate="">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <div class="submit-row">
+                <input type="submit" value="Save" class="default" name="save">
+                <input type="submit" value="Cancel" class="default" name="cancel">
+              </div>
+              <script id="django-admin-form-add-constants" src="{% static 'admin/js/change_form.js' %}"
+                data-model-name="tag" async=""></script>
+              <script id="django-admin-prepopulated-fields-constants" src="{% static 'admin/js/prepopulate_init.js' %}"
+                data-prepopulated-fields="[]"></script>
+            </form>
+          </div>
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </main>
+    </div>
+  </div>
+  <!-- END Container -->
+</body>
+{% endblock %}

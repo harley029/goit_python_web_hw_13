@@ -1,0 +1,102 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" data-theme="auto">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Add quote</title>
+  <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'admin/css/dark_mode.css' %}">
+  <script src="{% static 'admin/js/theme.js' %}" defer></script>
+  <link rel="stylesheet" href="{% static 'admin/css/forms.css' %}">
+  <script src="{% static 'admin/js/saved_resource.js' %}"></script>
+  <script src="{% static 'admin/js/jquery.js' %}"></script>
+  <script src="{% static 'admin/js/jquery.init.js' %}"></script>
+  <script src="{% static 'admin/js/core.js' %}"></script>
+  <script src="{% static 'admin/js/RelatedObjectLookups.js' %}"></script>
+  <script src="{% static 'admin/js/actions.js' %}"></script>
+  <script src="{% static 'admin/js/urlify.js' %}"></script>
+  <script src="{% static 'admin/js/prepopulate.js' %}"></script>
+  <script src="{% static 'admin/js/xregexp.js' %}"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'admin/css/responsive.css' %}">
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <style>
+    .vt-augment {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .vt-augment.drawer {
+      display: none;
+      width: 700px;
+      background: white;
+      border: 1px solid #e6e6e6;
+      text-align: left;
+      z-index: 102;
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      box-shadow: -4px 5px 8px -3px rgba(17, 17, 17, .16);
+      animation: slideToRight 0.5s 1 forwards;
+      transform: translateX(100vw);
+    }
+
+    .vt-augment.drawer[opened] {
+      display: flex;
+      animation: slideFromRight 0.2s 1 forwards;
+    }
+
+    .vt-augment>.spinner {
+      position: absolute;
+      z-index: 199;
+      top: calc(50% - 50px);
+      left: calc(50% - 50px);
+      border: 8px solid rgba(0, 0, 0, 0.2);
+      border-left-color: white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1.2s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes slideFromRight {
+      0% {
+        transform: translateX(100vw);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideToRight {
+      100% {
+        transform: translateX(100vw);
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      .vt-augment.drawer {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+    
+{% block content %}
+    
+{% endblock %}
+    
+</html>
