@@ -89,7 +89,7 @@ async def add_process_time_header(request: Request, call_next):
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
     return templates.TemplateResponse(
-        "index.html", {"request": request, "our": "Build group WebPython #22"}
+        "index.html", {"request": request, "our": "Build group PythonWeb #22"}
     )
 
 
