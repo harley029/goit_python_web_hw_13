@@ -1,7 +1,10 @@
+from pathlib import Path
 import time
 from fastapi import Depends, FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from fastapi_limiter import FastAPILimiter
 from redis import Redis
 import redis.asyncio as redis
@@ -24,6 +27,10 @@ async def lifespan(app: FastAPI):
     await FastAPILimiter.init(redis_client)
     yield
     await redis_client.close()
+
+BASE_DIR = Path(".")
+
+templates = Jinja2Templates(directory=BASE_DIR / "src" / "templates")
 
 app = FastAPI(lifespan=lifespan)
 
@@ -53,6 +60,8 @@ async def ban_ips(request: Request, call_next: Callable):
     return response
 
 
+app.mount("/static", StaticFiles(directory=BASE_DIR / "src" / "static"), name="static")
+
 app.include_router(auth.router, prefix='/api')
 app.include_router(contacts.router, prefix="/api")
 app.include_router(users.router, prefix="/api")
@@ -77,10 +86,11 @@ async def add_process_time_header(request: Request, call_next):
 #     await FastAPILimiter.init(r)
 
 
-
-@app.get("/")
-def read_root():
-    return {"message": "Contacts database, version 1.0"}
+@app.get("/", response_class=HTMLResponse)
+def read_root(request: Request):
+    return templates.TemplateResponse(
+        "index.html", {"request": request, "our": "Build group WebPython #22"}
+    )
 
 
 @app.get("/api/healthchecker")

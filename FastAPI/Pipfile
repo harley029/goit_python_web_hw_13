@@ -25,6 +25,7 @@ python-dotenv = "1.0.1"
 pydantic-settings = "*"
 fastapi-limiter = "*"
 cloudinary = "*"
+jinja2 = "*"
 
 [dev-packages]
 pipenv = "2024.0.0"
